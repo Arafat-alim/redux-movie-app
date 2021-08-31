@@ -9,10 +9,18 @@ import movies from "./reducer/index";
 //creating a store
 const store = createStore(movies);
 console.log("store", store);
-console.log("State", store.getState());
+console.log("Before Dispatch State", store.getState());
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+store.dispatch({
+  type: "ADD_MOVIES",
+  movies: [{ name: "Superman" }],
+});
+
+console.log("After Dispatch the store - ", store.getState());
