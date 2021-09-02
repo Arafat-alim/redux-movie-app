@@ -23,7 +23,8 @@ const initialMoviesState = {
 //   }
 //   return state;
 // }
-export default function movies(state = initialMoviesState, action) {
+export function movies(state = initialMoviesState, action) {
+  console.log("MOVIES REDUCERS");
   switch (action.type) {
     case ADD_MOVIES:
       return {
@@ -53,4 +54,26 @@ export default function movies(state = initialMoviesState, action) {
         ...state,
       };
   }
+}
+
+// Adding Search Reducer
+const initialSearchState = {
+  result: {},
+};
+export function search(state = initialSearchState, action) {
+  console.log("SEARCH REDUCERS");
+  return state;
+}
+
+// Adding Root Reducer
+const initialRootState = {
+  movies: initialMoviesState, //just defined above (Movies Reducer)
+  search: initialSearchState, //just defined above (Search Reducer)
+};
+export default function rootReducer(state = initialRootState, action) {
+  //combining both the reducer just it
+  return {
+    movies: movies(state.movies, action), // Already define above
+    search: search(state.search, action), // aleady define above
+  };
 }

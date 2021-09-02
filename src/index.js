@@ -4,10 +4,11 @@ import { createStore } from "redux";
 
 import "./index.css";
 import App from "./Components/App";
-import movies from "./reducer/index";
+// import movies from "./reducer/index";
+import rootReducer from "./reducer/index";
 
 //creating a store
-const store = createStore(movies);
+const store = createStore(rootReducer);
 console.log("store", store);
 // console.log("Before Dispatch State", store.getState());
 
