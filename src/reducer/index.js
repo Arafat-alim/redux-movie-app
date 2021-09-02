@@ -1,11 +1,17 @@
 //! Reducers are pure funciton takese two arguements
 // ! 1) state
 // ! 2) actions
-import { ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE } from "../actions/index";
+import {
+  ADD_MOVIES,
+  ADD_FAVOURITE,
+  REMOVE_FAVOURITE,
+  SET_SHOW_FAVOURITE,
+} from "../actions/index";
 
 const initialMoviesState = {
   list: [],
   favourites: [],
+  showFavourites: false,
 };
 // export default function movies(state = initialMoviesState, action) {
 //   if (action.type === ADD_MOVIES) {
@@ -37,7 +43,11 @@ export default function movies(state = initialMoviesState, action) {
         ...state,
         favourites: filteredArr,
       };
-
+    case SET_SHOW_FAVOURITE:
+      return {
+        ...state,
+        showFavourites: action.val,
+      };
     default:
       return {
         ...state,

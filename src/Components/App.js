@@ -2,7 +2,7 @@ import { data } from "../data"; //directily fetching using componentDidMount
 import React from "react";
 import Navbar from "./Navbar";
 import Moviecard from "./Moviecard";
-import { addMovies } from "../actions";
+import { addMovies, setShowFavourites } from "../actions";
 
 class App extends React.Component {
   //Componentdidmount for fetching movies
@@ -29,20 +29,38 @@ class App extends React.Component {
     }
     return false;
   };
+
+  onChangeTab = (val) => {
+    this.props.store.dispatch(setShowFavourites(val));
+  };
   render() {
-    const { list } = this.props.store.getState(); //{list, favourite}
+    const { list, favourites, showFavourites } = this.props.store.getState(); //{list, favourite}
+
+    // display movies
+    const displayMovies = showFavourites ? favourites : list;
+
     console.log("Render - ", this.props.store.getState());
     return (
       <div className="App">
         <Navbar />
         <div className="main">
           <div className="tabs">
-            <div className="tab">Movies</div>
-            <div className="tab">Favourite</div>
+            <div
+              className={`tab ${showFavourites ? "" : "active-tabs"}`}
+              onClick={() => this.onChangeTab(false)}
+            >
+              Movies
+            </div>
+            <div
+              className={`tab ${showFavourites ? "active-tabs" : ""}`}
+              onClick={() => this.onChangeTab(true)}
+            >
+              Favourite
+            </div>
           </div>
 
           <div className="list">
-            {list.map((movie, index) => {
+            {displayMovies.map((movie, index) => {
               return (
                 <Moviecard
                   movie={movie}
@@ -53,6 +71,15 @@ class App extends React.Component {
               );
             })}
           </div>
+
+          {
+            // console.log(displayMovies.length === 0)
+            displayMovies.length === 0 ? (
+              <div className="no-movies">No Movies to show</div>
+            ) : (
+              ""
+            )
+          }
         </div>
       </div>
     );
