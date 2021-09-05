@@ -8,6 +8,8 @@ import {
   SET_SHOW_FAVOURITE,
 } from "../actions/index";
 
+import { combineReducers } from "redux";
+
 const initialMoviesState = {
   list: [],
   favourites: [],
@@ -70,10 +72,18 @@ const initialRootState = {
   movies: initialMoviesState, //just defined above (Movies Reducer)
   search: initialSearchState, //just defined above (Search Reducer)
 };
-export default function rootReducer(state = initialRootState, action) {
-  //combining both the reducer just it
-  return {
-    movies: movies(state.movies, action), // Already define above
-    search: search(state.search, action), // aleady define above
-  };
-}
+// export default function rootReducer(state = initialRootState, action) {
+//   //combining both the reducer just it
+//   return {
+//     movies: movies(state.movies, action), // Already define above
+//     search: search(state.search, action), // aleady define above
+//   };
+// }
+
+// ! we use combineReducers for combining reducer
+export default combineReducers({
+  // movies: movies,
+  // search: search,
+  movies,
+  search,
+});
