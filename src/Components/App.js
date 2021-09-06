@@ -2,7 +2,7 @@ import { data } from "../data"; //directily fetching using componentDidMount
 import React from "react";
 import Navbar from "./Navbar";
 import Moviecard from "./Moviecard";
-import { addMovies, setShowFavourites } from "../actions";
+import { addMovieToList, setShowFavourites } from "../actions";
 
 class App extends React.Component {
   //Componentdidmount for fetching movies
@@ -15,7 +15,7 @@ class App extends React.Component {
     });
     //make api call
     //dispatch my store
-    store.dispatch(addMovies(data));
+    store.dispatch(addMovieToList(data));
     console.log("STATE - ", this.props.store.getState());
   }
   // checking is my movie is present in favourite or not

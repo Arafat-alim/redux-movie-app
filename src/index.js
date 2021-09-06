@@ -24,11 +24,24 @@ const logger =
   (next) =>
   (action) => {
     //logger code
-    console.log("ACTION_TYPES: ", action.type);
+    // console.log("ACTION_TYPES: ", action.type);
     next(action);
   };
+
+// Creating a THUNK middleware
+const thunk =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    if (typeof action === "function") {
+      action(dispatch);
+      return;
+    }
+    next(action);
+  };
+
 //creating a store
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 console.log("store", store);
 // console.log("Before Dispatch State", store.getState());
 

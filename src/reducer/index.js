@@ -68,10 +68,10 @@ export function search(state = initialSearchState, action) {
 }
 
 // Adding Root Reducer
-const initialRootState = {
-  movies: initialMoviesState, //just defined above (Movies Reducer)
-  search: initialSearchState, //just defined above (Search Reducer)
-};
+// const initialRootState = {
+//   movies: initialMoviesState, //just defined above (Movies Reducer)
+//   search: initialSearchState, //just defined above (Search Reducer)
+// };
 // export default function rootReducer(state = initialRootState, action) {
 //   //combining both the reducer just it
 //   return {
