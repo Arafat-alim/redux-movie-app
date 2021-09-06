@@ -8,15 +8,25 @@ import App from "./Components/App";
 import rootReducer from "./reducer/index";
 
 // creating a middleware named  logger
-const logger = function ({ dispatch, getState }) {
-  return function (next) {
-    return function (action) {
-      //middleware codes
-      console.log("ACTION_TYPES - ", action.type);
-      next(action); //! Important to call next, warna yehi pe stuck hojyga code
-    };
+// const logger = function ({ dispatch, getState }) {
+//   return function (next) {
+//     return function (action) {
+//       //middleware codes
+//       console.log("ACTION_TYPES - ", action.type);
+//       next(action); //! Important to call next, warna yehi pe stuck hojyga code
+//     };
+//   };
+// };
+
+//! Modifying Middlware
+const logger =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    //logger code
+    console.log("ACTION_TYPES: ", action.type);
+    next(action);
   };
-};
 //creating a store
 const store = createStore(rootReducer, applyMiddleware(logger));
 console.log("store", store);
